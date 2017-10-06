@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: content: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <script src="components/loader.js"></script>
+    <link rel="stylesheet" href="components/loader.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        var counter = 0; //カウンタ
+    
+        $(function(){
+            $('#count-up-button').on('touchend',function(){
+                if(counter<9999){
+                    counter++;
+                }
+                console.log('counter:' + counter);
+                img_update();
+            })
+            
+            $('#count-down-button').on('touchend',function(){
+                if(counter>0){
+                    counter--;
+                }
+                console.log('counter:' + counter);
+                img_update();
+            })
+        })
+        
+        function reset(){
+            if(counter > 0 && confirm('カウンターをリセットしますか？')){
+                counter = 0;
+                img_update();
+            }
+        }
+        
+        //カウンタの画面を更新するfunction
+        function img_update(){
+            //例：1 → 0001
+            //例：123 → 0123
+            
+            // var 1keta = 0;
+            // var 2keta = 0;
+            // var 3keta = 0;
+            // var 4keta = 0;
+            
+            // var counter = 9234;
+            // console.log(Math.floor(counter/1000));
+            
+            var str = '0000' + counter;
+            str = str.substring(str.length - 4 , str.length);
+            
+            $('#1keta').attr('src','img/no_0' + str[3] + '.png');
+            $('#2keta').attr('src','img/no_0' + str[2] + '.png');
+            $('#3keta').attr('src','img/no_0' + str[1] + '.png');
+            $('#4keta').attr('src','img/no_0' + str[0] + '.png');
+            }
+        
+         $('#reset-button').on('touchend',reset());
+             update();
+        
+    </script>
+</head>
+<body>
+	
+    <div>
+        <img id="4keta" src="img/no_00.png" width="55">
+        <img id="3keta" src="img/no_00.png" width="55">
+        <img id="2keta" src="img/no_00.png" width="55">
+        <img id="1keta" src="img/no_00.png" width="55">
+    </div>
+    
+    
+
+<div>
+    <button id="reset-button"><img src="img/btn_reset_normal.png" width="64"></button>    
+</div>
+<button id="count-up-button"><img src="img/btn_count_up.gif" width="127"></button>
+<button id="count-down-button"><img src="img/btn_count_down.gif" width="127"></button>
+
+</body>
+</html>
